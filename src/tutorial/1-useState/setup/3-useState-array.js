@@ -37,16 +37,16 @@ export default UseStateArray;
 /*
 Disini kita membuat useState dgn value nya adalah obj array dalam data.
 dan mengambil semua list dalam data original array menggunakan array map 
-dan ketika button diklik otomatis semua object akan menghilang.
+dan ketika button clear all diklik otomatis semua object akan menghilang.
 
 Kenapa ?
 Karena kita mengupdate nya menggunakan setPeople dengan empty array []
 
-Dan untuk refresh all atau kembali ke default setPeople mengarah pada data or obj array tsb.
+Dan untuk refresh all atau kembali ke default setPeople mengarah pada data obj array tsb.
 
 Dan untuk menghapus setiap individu array bisa menggunakan filter
 ingat filter digunakan untuk mengubah original array 
-dan disitu setiap id yg tidak sama cth id:1 !== 1 artinya false otomatis akan [] empty obj
+dan disitu setiap id yg tidak sama cth id: 1 !== 1 artinya false otomatis akan [] empty obj
 dan empty obj tsb untuk menghapus obj secara individu yg diupdate oleh setPeople
 
 */
