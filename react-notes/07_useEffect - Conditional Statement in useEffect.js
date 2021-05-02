@@ -7,7 +7,6 @@ const UseEffectBasics = () => {
 
   useEffect(() => {
     if (value >= 1) {
-      console.log('call useEffect');
       document.title = `New Messages(${value})`;
     }
   });
@@ -27,27 +26,19 @@ const UseEffectBasics = () => {
 export default UseEffectBasics;
 
 /*
-useEffect dependecy list
+useEffect dia akan running sesudah render component
 
-Jika useEffect menggunakan dependecy list or second parameter [] empty list
-
-  useEffect(() => {
-    if (value >= 1) {
-      console.log('call useEffect');
-      document.title = `New Messages(${value})`;
-    }
-  },[]);
-
-Otomatis disini dia hanya menjalankan render saja, tapi
-Jika di isi dgn value [value] otomatis dia akan menjalankan useEffect dan mengupdate value
+dan selalu ingat rules Hooks, 
+kamu tidak bisa menyimpan conditional statement yg didalamnya memiliki hooks.
 
   useEffect(() => {
-    if (value >= 1) {
-      console.log('call useEffect');
+    if (value > 1) {
       document.title = `New Messages(${value})`;
     }
-  },[value]);
+  });
 
-Dan jika tanpa dependency list dia akan otomatis menjalankan useEffect stlah render component
+Contoh diatas benar karena conditional statement didalam hooks,
+artinya jika value lebih besar sama dgn 1 nilai document.title akan bertambah (ditampilkan), jika tidak alias (0)
+tidak akan ditampilkan 
 
 */
