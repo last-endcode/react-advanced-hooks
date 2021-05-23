@@ -9,26 +9,10 @@ const ControlledInputs = () => {
   // empty name
   const [name, setName] = useState('');
   const [mail, setMail] = useState('');
-  // add empty string tuk mnjdi nilai penampung
-  const [person, setPerson] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // if true
-    if (name && mail) {
-      // masukan id baru, dan name, mail yg diketik ke people jika key match akan disimpan ke nilai
-      const people = { id: new Date().getTime().toString(), name, mail };
-      console.log(people);
-      // update to empty array
-      // oldPerson is current person empty, and will update by people
-      setPerson((oldPerson) => {
-        return [...oldPerson, people];
-      });
-      setName('');
-      setMail('');
-    } else {
-      console.log('empty string');
-    }
+    console.log(name, mail);
   };
   return (
     <article>
@@ -56,15 +40,6 @@ const ControlledInputs = () => {
         </div>
         <button className='btn'>add person</button>
       </form>
-      {person.map((item) => {
-        const { id, name, mail } = item;
-        return (
-          <div className='item' key={id}>
-            <h4>{name}</h4>
-            <p>{mail}</p>
-          </div>
-        );
-      })}
     </article>
   );
 };
@@ -72,6 +47,30 @@ const ControlledInputs = () => {
 export default ControlledInputs;
 
 /*
+Untuk mengkoneksikan input dengan form diperlukan 
+useState, dan dalam input value juga diperlukan 
+useState value tsb, dan onChange agar bisa terkoneksi yang koneksi tsb dan di passing by reference pada function handleSubmit sehingga menghasilkan hasil yang diketik
 
+const [name, setName] = useState('');
+
+ <input
+  type='text'
+  name='name'
+  id='name'
+  value={name}
+  onChange={(e) => setName(e.target.value)}
+/>
+
+value nya adalah useSate value
+onChange use event obj, dan setName merujuk pada event obj
+target .value 
+
+otomatis ketika dicetak dalam handleSubmit menghasilkan
+hasil yang diketikan tsb
+
+ const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(name, mail);
+  };
 
 */
