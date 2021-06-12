@@ -1,10 +1,44 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { data } from '../../../data';
 
-// more components
-// fix - context api, redux (for more complex cases)
+const myContext = React.createContext();
 
-const PropDrilling = () => {
-  return <h2>prop drilling</h2>;
+function PropsDrilling() {
+  const [person, setPerson] = useState(data);
+
+  const removeItem = (id) => {
+    setPerson((person) => {
+      return person.filter((person) => person.id !== id);
+    });
+  };
+  return (
+    <div>
+      <myContext.Provider value={{ person, removeItem }}>
+        <List />
+      </myContext.Provider>
+    </div>
+  );
+}
+
+const List = () => {
+  const mainData = useContext(myContext);
+  return (
+    <>
+      {mainData.person.map((people) => {
+        return <SinglePerson key={people.id} {...people} />;
+      })}
+    </>
+  );
 };
 
-export default PropDrilling;
+const SinglePerson = ({ id, name }) => {
+  const { removeItem } = useContext(myContext);
+  return (
+    <div className='item'>
+      <h4>{name}</h4>
+      <button onClick={() => removeItem(id)}>remove item</button>
+    </div>
+  );
+};
+
+export default PropsDrilling;
