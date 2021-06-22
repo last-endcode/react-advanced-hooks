@@ -29,27 +29,7 @@ const reducer = (state, action) => {
       modalContent: 'Please Add text!',
     };
   }
-
-  if (action.type === 'CLOSE_MODAL') {
-    return {
-      ...state,
-      isModalOpen: false,
-    };
-  }
-
-  if (action.type === 'REMOVE_ITEM') {
-    const removePerson = state.people.filter(
-      (person) => person.id !== action.payload
-    );
-    return {
-      ...state,
-      people: removePerson,
-      isModalOpen: true,
-      modalContent: 'Your Remove Item',
-    };
-  }
-
-  // for error action.type not equal
+  // ini digunakan agar jika ada error yg tidak sama with action
   throw new Error('error matching action type!');
 };
 
@@ -79,20 +59,11 @@ const Index = () => {
       dispatch({ type: 'NO_VALUE' });
     }
   };
-
-  // for closeModal notif
-  const closeModal = () => {
-    dispatch({ type: 'CLOSE_MODAL' });
-  };
-
   return (
     <>
       {/* if true will show modal */}
       {/* add props modalContent for <Modal/> */}
-      {/* add props closeModal for closeModal */}
-      {state.isModalOpen && (
-        <Modal modalContent={state.modalContent} closeModal={closeModal} />
-      )}
+      {state.isModalOpen && <Modal modalContent={state.modalContent} />}
       <form onSubmit={handleSubmit} className='form'>
         <div>
           <input
@@ -106,20 +77,7 @@ const Index = () => {
 
       <div>
         {state.people.map((person) => {
-          return (
-            <>
-              <div className='item'>
-                <h4>{person.name}</h4>
-                <button
-                  onClick={() =>
-                    dispatch({ type: 'REMOVE_ITEM', payload: person.id })
-                  }
-                >
-                  remove item
-                </button>
-              </div>
-            </>
-          );
+          return <h4 key={person.id}>{person.name}</h4>;
         })}
       </div>
     </>
